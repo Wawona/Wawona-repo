@@ -21,7 +21,15 @@
     pkgs = import nixpkgs {
       system = hostSystem;
       crossSystem = targetSystem;
-      overlays = [];  # Add overlays for roothide or iOS-specific patches later
+      overlays = [
+        (final: prev: {
+          libresolv = prev.libresolv.overrideAttrs (oldAttrs: {
+            preConfigure = ''
+              export SDKROOT=${prev.apple_sdk.sdkPath}
+            '';
+          });
+        })
+      ];  # Add overlays for roothide or iOS-specific patches later
     };
   in {
     # Default dev shell for building/testing
