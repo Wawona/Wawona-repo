@@ -18,6 +18,47 @@ mkdir -p "$ROOTHIDE_DIR" "$ARCH_DIR_64" "$ARCH_DIR_64E"
 # Detect OS
 OS="$(uname)"
 
+# ─────────────────────────────────────────────────────────────────
+# Upstream sync from roothide.github.io
+# Fetches new .deb files not already present in $ROOTHIDE_DIR
+# ─────────────────────────────────────────────────────────────────
+UPSTREAM_BASE="https://roothide.github.io"
+
+sync_upstream() {
+    echo "Syncing upstream packages from $UPSTREAM_BASE..."
+    local tmp
+    tmp=$(mktemp)
+    if ! curl -sfL "$UPSTREAM_BASE/Packages.gz" | zcat > "$tmp" 2>/dev/null; then
+        echo "Warning: could not fetch upstream Packages.gz — skipping sync."
+        rm -f "$tmp"
+        return 0
+    fi
+    local count=0
+    while IFS= read -r line; do
+        if [[ "$line" == Filename:* ]]; then
+            local rel="${line#Filename: }"
+            rel="${rel#./}"
+            local fname
+            fname=$(basename "$rel")
+            local dest="$ROOTHIDE_DIR/$fname"
+            if [[ ! -f "$dest" ]]; then
+                if curl -sfL "$UPSTREAM_BASE/$rel" -o "$dest" 2>/dev/null; then
+                    count=$((count + 1))
+                    echo "  + $fname"
+                else
+                    rm -f "$dest"
+                    echo "  ! failed: $fname"
+                fi
+            fi
+        fi
+    done < "$tmp"
+    rm -f "$tmp"
+    echo "Upstream sync complete. New packages: $count"
+}
+
+sync_upstream
+
+
 # Function to get file size portably
 get_size() {
     if stat --version 2>/dev/null | grep -q "GNU"; then

@@ -7,19 +7,19 @@ Architectures: iphoneos-arm64 iphoneos-arm64e
 Components: main
 Description: Wawona System Utilities
 Icon: https://repo.wawona.io/CydiaIcon.png
-Date: Wed, 18 Mar 2026 02:05:55 -0700
+Date: Wed, 18 Mar 2026 02:25:01 -0700
 MD5Sum:
  b0af747c9a7187793478a83465813138 407 main/binary-iphoneos-arm64/Packages
  0a26c9e96a386d529adcab36dd13b5be 295 main/binary-iphoneos-arm64/Packages.gz
- 74d9f7ee8bdfb08954dd4672ebcf61f4 485 main/binary-iphoneos-arm64e/Packages
- e2eb37e65dacde637e1f8450e4124119 341 main/binary-iphoneos-arm64e/Packages.gz
+ c9967bd738beb5a86e6d007b98d1d481 113429 main/binary-iphoneos-arm64e/Packages
+ a1b197426b7d0d18d8a074f040ccbd4b 26093 main/binary-iphoneos-arm64e/Packages.gz
 SHA1:
  2e2fbd6770f37e2eed85793785d795b958b9a644 407 main/binary-iphoneos-arm64/Packages
  65ec4980e8ecbcc87886a9e2f6d360f59b85385f 295 main/binary-iphoneos-arm64/Packages.gz
- c1949cfd3b9c79410e80ae37bd18074cf7f40498 485 main/binary-iphoneos-arm64e/Packages
- 4606730c4b779c220da91142a50b7d2074ce54ae 341 main/binary-iphoneos-arm64e/Packages.gz
+ 61f515aea281bba8c8db5df717843fc617644c70 113429 main/binary-iphoneos-arm64e/Packages
+ 50f34e7d11ac3ca6747d0ba9c34460b65586ddff 26093 main/binary-iphoneos-arm64e/Packages.gz
 SHA256:
  71c43664792f74e9597929f4d070156e8a65c0c33f10edac0d45b4f14a150b74 407 main/binary-iphoneos-arm64/Packages
  7f27b6d8ba52a942c221519e9900e15965fd3f44d994d78f805238dc0e04300b 295 main/binary-iphoneos-arm64/Packages.gz
- 69b70bf96ef8da98381ae8927eaeac581a118c7971752831595aa4032ae93c77 485 main/binary-iphoneos-arm64e/Packages
- 5bf92d33eb26d4bfa49ece61c2a23cf6ef88bc7f7f98849497e0fd6c1134b773 341 main/binary-iphoneos-arm64e/Packages.gz
+ 1f4db9a2ed170c801c3b1a18caee4ad87ed20ee255c707fc5b703562b7b72cd1 113429 main/binary-iphoneos-arm64e/Packages
+ f5892fab0c0b6c5e874e92ab31550b4652506543365014652b2b1b59609e7147 26093 main/binary-iphoneos-arm64e/Packages.gz
