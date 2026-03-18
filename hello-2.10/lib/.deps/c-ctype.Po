@@ -1,0 +1,5 @@
+lib/c-ctype.o: lib/c-ctype.c config.h lib/c-ctype.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdbool.h
+config.h:
+lib/c-ctype.h:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdbool.h:
