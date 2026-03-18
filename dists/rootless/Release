@@ -1,8 +1,8 @@
 Origin: Wawona
 Label: Wawona
-Suite: stable
+Suite: rootless
 Version: 1.0
-Codename: stable
+Codename: rootless
 Architectures: iphoneos-arm64 iphoneos-arm64e
 Components: main
 Description: Wawona System Utilities

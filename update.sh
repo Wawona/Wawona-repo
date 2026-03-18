@@ -100,6 +100,7 @@ Codename: $SUITE
 Architectures: $ARCH_64 $ARCH_64E
 Components: main
 Description: Wawona System Utilities
+Date: $(date -R)
 MD5Sum:
  $(md5sum Packages | cut -d' ' -f1) $(get_size Packages) Packages
  $(md5sum Packages.gz | cut -d' ' -f1) $(get_size Packages.gz) Packages.gz
@@ -129,6 +130,7 @@ Codename: $SUITE
 Architectures: $ARCH_64 $ARCH_64E
 Components: main
 Description: Wawona System Utilities
+Date: $(date -R)
 MD5Sum:
  $(md5sum "$ARCH_DIR_64/Packages" | cut -d' ' -f1) $(get_size "$ARCH_DIR_64/Packages") main/binary-$ARCH_64/Packages
  $(md5sum "$ARCH_DIR_64/Packages.gz" | cut -d' ' -f1) $(get_size "$ARCH_DIR_64/Packages.gz") main/binary-$ARCH_64/Packages.gz
@@ -145,6 +147,15 @@ SHA256:
  $(sha256sum "$ARCH_DIR_64E/Packages" | cut -d' ' -f1) $(get_size "$ARCH_DIR_64E/Packages") main/binary-$ARCH_64E/Packages
  $(sha256sum "$ARCH_DIR_64E/Packages.gz" | cut -d' ' -f1) $(get_size "$ARCH_DIR_64E/Packages.gz") main/binary-$ARCH_64E/Packages.gz
 EOF
+
+# 4b. Provide 'rootless' suite as an alias for 'stable'
+echo "Updating suite aliases..."
+rm -rf "$ROOT/dists/rootless"
+mkdir -p "$ROOT/dists"
+cp -r "$ROOT/dists/stable" "$ROOT/dists/rootless"
+# Fix Suite/Codename in the new Release file
+sed_i "s/Suite: stable/Suite: rootless/" "$ROOT/dists/rootless/Release"
+sed_i "s/Codename: stable/Codename: rootless/" "$ROOT/dists/rootless/Release"
 
 # 5. Sync to Git Index
 if [ -d .git ]; then
