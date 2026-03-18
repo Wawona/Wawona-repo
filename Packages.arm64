@@ -1,0 +1,14 @@
+Package: com.aspauldingcode.hello
+Version: 0.1.0
+Architecture: iphoneos-arm64
+Maintainer: aspauldingcode
+Filename: ./debs/hello_0.1.0_iphoneos-arm64.deb
+Size: 808
+MD5sum: 14d300de64784178d663182087a5e547
+SHA1: 8ad78592416a90ba7b82d565abcf8798b705493b
+SHA256: 6ae931856f293b776999306f74ee85ef7d6e6ec54e207dfd91c7ca1b40619b73
+Section: Utilities
+Description: Rootless Hello
+Author: aspauldingcode
+Name: Hello
+

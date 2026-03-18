@@ -1,0 +1,17 @@
+Origin: Wawona
+Label: Wawona
+Suite: stable
+Version: 1.0
+Codename: stable
+Architectures: iphoneos-arm64 iphoneos-arm64e
+Components: main
+Description: Wawona System Utilities
+MD5Sum:
+ add553aea57fdb26674bc9a8f655be93 892 Packages
+ 20f3473fd627b0ff86351e6fb60f0cd9 463 Packages.gz
+SHA1:
+ efe1caa43228ccde1a37002659ea456bf728f752 892 Packages
+ 35330c1faa3c4dcf781b08e3532b40728dbcbc07 463 Packages.gz
+SHA256:
+ 1184fdafe9bae998db26d9f11f3b986db6e31176ea950f61ca58e35e8d81a307 892 Packages
+ 2ad1c0a10403825ef25e8b242187b1b3166c094c1fe12cd7e67c2ee9e02adf8c 463 Packages.gz

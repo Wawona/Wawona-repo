@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wawona Repo | iOS 13 - 26+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Mode Default */
+            --primary: #8a2be2;
+            --secondary: #4b0082;
+            --accent: #007aff;
+            /* Apple Blue for light mode */
+            --bg: #f5f5f7;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --text: #1d1d1f;
+            --text-dim: #86868b;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --border: rgba(0, 0, 0, 0.05);
+            --url-bg: rgba(0, 0, 0, 0.05);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #a855f7;
+                --secondary: #4b0082;
+                --accent: #00f2ff;
+                --bg: #050505;
+                --card-bg: rgba(255, 255, 255, 0.05);
+                --text: #ffffff;
+                --text-dim: #b0b0b0;
+                --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                --border: rgba(255, 255, 255, 0.1);
+                --url-bg: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.4;
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            -webkit-overflow-scrolling: touch;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            /* Start from top to allow scrolling */
+            min-height: 100vh;
+            padding: 30px 10px;
+            /* More padding for scrollable space */
+            transition: background-color 0.3s ease;
+        }
+
+        .background-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, var(--secondary) 0%, transparent 70%);
+            opacity: 0.1;
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .container {
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            background: var(--card-bg);
+            padding: 24px 20px;
+            border-radius: 28px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .logo-container {
+            margin-bottom: 12px;
+        }
+
+        .logo-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            margin: 0 auto 6px auto;
+            /* Center horizontally */
+        }
+
+        .logo-dark {
+            display: none;
+        }
+
+        .logo-light {
+            display: block;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .logo-dark {
+                display: block;
+            }
+
+            .logo-light {
+                display: none;
+            }
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        h1 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        p {
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            padding: 0 10px;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn img {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 0 8px 16px -4px rgba(138, 43, 226, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 20px -4px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .btn-secondary {
+                background: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .manual-section {
+            text-align: left;
+            margin-top: 12px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .manual-section h2 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        .url-box {
+            background: var(--url-bg);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--border);
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            font-weight: 600;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        footer {
+            margin-top: 25px;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <div class="container">
+        <div class="logo-container">
+            <img src="images/logo/wawona-light.png" alt="Wawona Logo" class="logo-img logo-light">
+            <img src="images/logo/wawona-dark.png" alt="Wawona Logo" class="logo-img logo-dark">
+            <div class="logo">Wawona</div>
+        </div>
+        <h1>System Utilities Repo</h1>
+        <p>Wawona is a high-performance Wayland compositor for iOS, macOS, and Android. This repository supports <b>iOS
+                13.0 - 26.0+</b> and provides specialized jailbreak tweaks (Springboard/LockScreen replacements,
+            DRM/dmabuf support) and native Wayland software.</p>
+
+        <div class="actions">
+            <a href="sileo://source/https://repo.wawona.io/" class="btn btn-primary">
+                <img src="images/logo/sileo.png" alt="Sileo">
+                Add to Sileo
+            </a>
+            <a href="zebra://sources/add/https://repo.wawona.io" class="btn btn-secondary">
+                <img src="images/logo/zebra.svg" alt="Zebra">
+                Add to Zebra
+            </a>
+        </div>
+
+        <div class="manual-section">
+            <h2>Manual Setup</h2>
+            <div class="url-box">
+                <span id="repo-url">https://repo.wawona.io</span>
+                <button class="copy-btn" onclick="copyUrl()">COPY</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <a href="https://wawona.io" target="_blank">wawona.io</a><br>
+        &copy; 2025-<span id="current-year"></span> Wawona. MIT Licensed.
+    </footer>
+
+    <script>
+        function copyUrl() {
+            const url = document.getElementById('repo-url').innerText;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.innerText = 'COPIED!';
+                setTimeout(() => btn.innerText = 'COPY', 2000);
+            });
+        }
+        document.getElementById('current-year').innerText = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
