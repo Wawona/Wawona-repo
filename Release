@@ -7,13 +7,13 @@ Architectures: iphoneos-arm64 iphoneos-arm64e
 Components: main
 Description: Wawona System Utilities
 Icon: https://repo.wawona.io/CydiaIcon.png
-Date: Wed, 18 Mar 2026 02:25:00 -0700
+Date: Wed, 18 Mar 2026 02:32:42 -0700
 MD5Sum:
- 92a77fc0747c2748c631d57df9af9d7f 113836 Packages
- a975b80596cb33e9dec161b48febba68 26215 Packages.gz
+ 1ce95847191dd9ceb8edea497e9f9147 892 Packages
+ 9432991a510d339a8a20d77d7be8f0cf 460 Packages.gz
 SHA1:
- 3247b1bf466a9e0ff6b9c6a69646ff0c0a54fe1b 113836 Packages
- 46eff9037eb0f5033166ff42590390a3b385be97 26215 Packages.gz
+ 7b9e8c2903151e7cd5d3d535c8879aa9abaefb17 892 Packages
+ 9818914aaac8515b623b7b3fde518f90ebb4748a 460 Packages.gz
 SHA256:
- e0b96417c1d663838daf2903058de04dec4aacff0c9bfa3cf07ceca427b6cebf 113836 Packages
- 9c3fbdfc19775fcdf1d3f930159c37c34b13eb6d5a8e75e41868438cf584a9e3 26215 Packages.gz
+ 3b3da1323063fdd7dc7539f099463ca3476dcfe127be528aee2422c6ed2762f2 892 Packages
+ 3a64b937138cf656f1b3d6a9ab03ddf412b53f9641d955a3f909a46955259aa1 460 Packages.gz
