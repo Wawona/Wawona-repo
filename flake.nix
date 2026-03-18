@@ -13,7 +13,7 @@
     targetSystem = {
       config = "aarch64-apple-ios";
       isStatic = true;  # For static linking in jailbreak envs
-      sdkVer = "15.0";  # Adjust to your target iOS version
+      sdkVer = "15.5";  # Adjust to your target iOS version
       # Use Xcode SDK if available; Nix will leverage it for cross-compilation
     };
 
