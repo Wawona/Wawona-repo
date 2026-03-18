@@ -1,0 +1,30 @@
+
+diff --git a/include/apr.h.in b/include/apr.h.in
+index 3b9b7e2..d5f3e1d 100644
+--- a/include/apr.h.in
++++ b/include/apr.h.in
+@@ -453,7 +453,7 @@
+ #elif (defined(PID_T_SIZE) && PID_T_SIZE == 8)
+ typedef apr_int64_t apr_pid_t;
+ #else
+-/* Can not determine the proper size for pid_t */
++typedef int apr_pid_t;
+ #endif
+ 
+ /**
+diff --git a/include/apr_want.h b/include/apr_want.h
+index 9a3b7d1..b3e4a5d 100644
+--- a/include/apr_want.h
++++ b/include/apr_want.h
+@@ -91,9 +91,6 @@
+ #if APR_HAVE_STRUCT_IOVEC
+ /* We have struct iovec. It might be in sys/uio.h */
+ #if !defined(IOV_MAX)
+-struct iovec
+-{
+-    void *iov_base;
+-    size_t iov_len;
+-};
+ #endif
+ #endif
+ 

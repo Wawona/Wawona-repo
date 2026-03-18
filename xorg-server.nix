@@ -1,4 +1,4 @@
 
-{ pkgs }:
+{ pkgs, fetchurl }:
 
 pkgs.xorg.xorgserver

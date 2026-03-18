@@ -1,0 +1,11 @@
+--- a/unix/Makefile
++++ b/unix/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ # Generic C configuration:
+-CFLAGS = -I. -DUNIX
++CFLAGS = -I. -DUNIX -DBZIP2_SUPPORT -Wno-deprecated-non-prototype
+ 
+ # for zcrypt
+ Z_H = ../zcrypt.h
