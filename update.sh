@@ -100,6 +100,7 @@ Codename: $SUITE
 Architectures: $ARCH_64 $ARCH_64E
 Components: main
 Description: Wawona System Utilities
+Icon: https://repo.wawona.io/CydiaIcon.png
 Date: $(date -R)
 MD5Sum:
  $(md5sum Packages | cut -d' ' -f1) $(get_size Packages) Packages
@@ -130,6 +131,7 @@ Codename: $SUITE
 Architectures: $ARCH_64 $ARCH_64E
 Components: main
 Description: Wawona System Utilities
+Icon: https://repo.wawona.io/CydiaIcon.png
 Date: $(date -R)
 MD5Sum:
  $(md5sum "$ARCH_DIR_64/Packages" | cut -d' ' -f1) $(get_size "$ARCH_DIR_64/Packages") main/binary-$ARCH_64/Packages
@@ -160,7 +162,7 @@ sed_i "s/Codename: stable/Codename: rootless/" "$ROOT/dists/rootless/Release"
 # 5. Sync to Git Index
 if [ -d .git ]; then
     echo "Updating Git index..."
-    git add Packages Packages.gz Release releases roothide/*.deb dists/ .nojekyll
+    git add Packages Packages.gz Release releases roothide/*.deb dists/ .nojekyll CydiaIcon.png
     echo "Git index synchronized successfully."
 fi
 

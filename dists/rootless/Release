@@ -6,7 +6,8 @@ Codename: rootless
 Architectures: iphoneos-arm64 iphoneos-arm64e
 Components: main
 Description: Wawona System Utilities
-Date: Wed, 18 Mar 2026 02:04:31 -0700
+Icon: https://repo.wawona.io/CydiaIcon.png
+Date: Wed, 18 Mar 2026 02:05:55 -0700
 MD5Sum:
  b0af747c9a7187793478a83465813138 407 main/binary-iphoneos-arm64/Packages
  0a26c9e96a386d529adcab36dd13b5be 295 main/binary-iphoneos-arm64/Packages.gz
