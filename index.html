@@ -511,7 +511,8 @@
                 </div>
             </details>
 
-            <button id="show-all-btn" class="btn btn-secondary" style="width: 100%; margin-top: 20px; font-size: 0.8rem; opacity: 0.6;" onclick="showAllOptions()">Show all setup options</button>
+            <p id="recom-status" style="font-size: 0.8rem; color: var(--text-dim); margin-top: 30px; opacity: 0.8;">Showing recommended setup options</p>
+            <button id="show-all-btn" class="btn btn-secondary" style="width: 100%; margin-top: 10px; font-size: 0.8rem; opacity: 0.6;" onclick="showAllOptions()">Show all setup options</button>
         </div>
 
     </div>
@@ -541,6 +542,7 @@
             const cliTermux = document.getElementById('cli-link-termux');
             const cliDesc = document.getElementById('cli-description');
             const showBtn = document.getElementById('show-all-btn');
+            const recomStatus = document.getElementById('recom-status');
 
             guiSection.style.display = 'block';
             guiActions.style.display = 'flex';
@@ -559,6 +561,7 @@
             cliSection.classList.remove('recommended');
             
             showBtn.style.display = 'none';
+            if (recomStatus) recomStatus.style.display = 'none';
         }
 
         function detectOS() {
