@@ -1,1 +1,0 @@
-../../../../../../../../../src/kernel/libsyscall/mach/mach/mach_right.h

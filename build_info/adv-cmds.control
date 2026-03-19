@@ -1,9 +1,0 @@
-Package: adv-cmds
-Priority: important
-Section: Administration
-Maintainer: @DEB_MAINTAINER@
-Architecture: @DEB_ARCH@
-Multi-Arch: foreign
-Version: @DEB_ADV-CMDS_V@
-Depends: libncursesw6
-Description: cap_mkdb, colldef, finger, gencat, last, locale, lsvfs, tabs

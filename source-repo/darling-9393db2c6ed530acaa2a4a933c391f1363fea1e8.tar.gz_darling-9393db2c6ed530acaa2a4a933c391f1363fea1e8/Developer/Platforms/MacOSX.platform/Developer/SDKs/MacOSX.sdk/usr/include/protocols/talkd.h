@@ -1,1 +1,0 @@
-../../../../../../../../../src/libc/include/protocols/talkd.h

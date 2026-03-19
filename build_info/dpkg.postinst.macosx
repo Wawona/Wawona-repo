@@ -1,3 +1,0 @@
-#!/bin/sh
-
-rm -f @MEMO_PREFIX@@MEMO_SUB_PREFIX@/bin/dpkg*.dpkg-tmp

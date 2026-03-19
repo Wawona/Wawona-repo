@@ -1,9 +1,0 @@
-Package: roothide-dev
-Name: roothide devkit
-Version: @DEB_ROOTHIDE_V@
-Architecture: @DEB_ARCH@
-Description: roothide devkit package
-Maintainer: roothide
-Author: roothide
-Section: Development
-Priority: optional

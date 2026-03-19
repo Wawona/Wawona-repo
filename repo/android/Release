@@ -1,0 +1,11 @@
+Origin: Wawona
+Label: Wawona (Android)
+Suite: stable
+Codename: stable
+Architectures: aarch64
+Components: main
+Description: Wawona System Utilities for Android
+Date: Thu, 19 Mar 2026 09:30:43 -0700
+MD5Sum:
+ d41d8cd98f00b204e9800998ecf8427e 0 Packages
+ 4a4dd3598707603b3f76a2378a4504aa 20 Packages.gz

@@ -275,25 +275,42 @@
         </div>
         <h1>System Utilities Repo</h1>
         <p>Wawona is a high-performance Wayland compositor for iOS, macOS, and Android. This repository supports <b>iOS
-                13.0 - 26.0+</b> and provides specialized jailbreak tweaks (Springboard/LockScreen replacements,
-            DRM/dmabuf support) and native Wayland software.</p>
+                13.0 - 26.0+</b> (Rootless/RootHide) and <b>Android (Termux)</b>, providing specialized software and native Wayland utilities.</p>
 
         <div class="actions">
-            <a href="sileo://source/https://repo.wawona.io" class="btn btn-primary">
+            <a href="sileo://source/https://repo.wawona.io/ios" class="btn btn-primary">
                 <img src="images/logo/sileo.png" alt="Sileo">
                 Add to Sileo
             </a>
-            <a href="zebra://sources/add/https://repo.wawona.io" class="btn btn-secondary">
+            <a href="zebra://sources/add/https://repo.wawona.io/ios" class="btn btn-secondary">
                 <img src="images/logo/zebra.svg" alt="Zebra">
                 Add to Zebra
             </a>
         </div>
 
         <div class="manual-section">
-            <h2>Manual Setup</h2>
+            <h2>Termux Setup (Android)</h2>
+            <p style="text-align: left; margin-bottom: 8px; font-size: 0.8rem;">Add the repo to Termux CLI:</p>
+            <div class="url-box" style="font-size: 0.75rem;">
+                <span id="termux-cmd">echo "deb https://repo.wawona.io/android stable main" > $PREFIX/etc/apt/sources.list.d/wawona.list && apt update</span>
+                <button class="copy-btn" onclick="copyText('termux-cmd', 0)">COPY</button>
+            </div>
+        </div>
+ 
+        <div class="manual-section">
+            <h2>iOS CLI Setup</h2>
+            <p style="text-align: left; margin-bottom: 8px; font-size: 0.8rem;">Add the repo via Terminal (SSH/NewTerm):</p>
+            <div class="url-box" style="font-size: 0.75rem;">
+                <span id="ios-cmd">echo "deb https://repo.wawona.io/ios stable main" | sudo tee /etc/apt/sources.list.d/wawona.list && sudo apt update</span>
+                <button class="copy-btn" onclick="copyText('ios-cmd', 1)">COPY</button>
+            </div>
+        </div>
+
+        <div class="manual-section">
+            <h2>Manual URL (Sileo/Zebra)</h2>
             <div class="url-box">
-                <span id="repo-url">https://repo.wawona.io</span>
-                <button class="copy-btn" onclick="copyUrl()">COPY</button>
+                <span id="repo-url">https://repo.wawona.io/ios</span>
+                <button class="copy-btn" onclick="copyText('repo-url', 2)">COPY</button>
             </div>
         </div>
 
@@ -305,10 +322,10 @@
     </footer>
 
     <script>
-        function copyUrl() {
-            const url = document.getElementById('repo-url').innerText;
-            navigator.clipboard.writeText(url).then(() => {
-                const btn = document.querySelector('.copy-btn');
+        function copyText(id, index) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelectorAll('.copy-btn')[index];
                 btn.innerText = 'COPIED!';
                 setTimeout(() => btn.innerText = 'COPY', 2000);
             });

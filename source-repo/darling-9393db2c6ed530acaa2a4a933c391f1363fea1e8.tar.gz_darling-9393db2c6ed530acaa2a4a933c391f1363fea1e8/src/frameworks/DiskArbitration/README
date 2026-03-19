@@ -1,4 +1,0 @@
-This is a completely dummy implementation.
-
-One could implement some of this functionality by wrapping polkit, udisks, etc.
-

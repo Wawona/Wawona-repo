@@ -1,1 +1,0 @@
-../../../../../../../../../src/libinfo/nis.subproj/ypinternal.h

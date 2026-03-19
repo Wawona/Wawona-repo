@@ -1,1 +1,0 @@
-../../../../../../../../src/libc/gen/get_compat.h

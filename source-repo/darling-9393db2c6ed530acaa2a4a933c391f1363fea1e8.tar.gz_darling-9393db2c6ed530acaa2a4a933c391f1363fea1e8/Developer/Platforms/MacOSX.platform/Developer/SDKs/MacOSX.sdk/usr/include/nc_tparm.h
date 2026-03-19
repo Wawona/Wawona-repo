@@ -1,1 +1,0 @@
-../../../../../../../../src/ncurses/include/nc_tparm.h

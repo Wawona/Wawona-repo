@@ -1,6 +1,0 @@
-bin/
-.DS_Store
-defaults
-*.o
-compile_commands.json
-.cache

@@ -1,6 +1,0 @@
-#ifndef _CARBONCORE_MIXEDMODE_H_
-#define _CARBONCORE_MIXEDMODE_H_
-
-#define STACK_UPP_TYPE(name) name
-
-#endif // _CARBONCORE_MIXEDMODE_H_

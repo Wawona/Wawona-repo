@@ -1,1 +1,0 @@
-define(DEBIANUTILS_VERSION, 5.7)

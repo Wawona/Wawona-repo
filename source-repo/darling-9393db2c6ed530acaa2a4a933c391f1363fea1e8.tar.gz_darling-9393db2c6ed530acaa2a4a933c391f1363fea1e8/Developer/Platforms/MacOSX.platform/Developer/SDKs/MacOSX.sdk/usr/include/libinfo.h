@@ -1,1 +1,0 @@
-../../../../../../../../src/libinfo/lookup.subproj/libinfo.h

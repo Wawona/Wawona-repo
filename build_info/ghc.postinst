@@ -1,5 +1,0 @@
-#!/bin/sh
-
-set -e
-
-@MEMO_PREFIX@@MEMO_SUB_PREFIX@/bin/ghc-pkg recache

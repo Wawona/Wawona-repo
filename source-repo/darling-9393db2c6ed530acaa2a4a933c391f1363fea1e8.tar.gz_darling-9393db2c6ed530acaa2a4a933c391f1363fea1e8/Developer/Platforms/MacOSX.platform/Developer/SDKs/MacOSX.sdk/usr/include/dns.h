@@ -1,1 +1,0 @@
-../../../../../../../../src/libresolv/include/dns.h

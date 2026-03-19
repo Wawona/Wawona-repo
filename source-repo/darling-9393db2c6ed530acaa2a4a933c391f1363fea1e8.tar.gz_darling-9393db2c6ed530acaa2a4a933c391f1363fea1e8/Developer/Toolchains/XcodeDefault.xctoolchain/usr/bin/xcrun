@@ -1,6 +1,0 @@
-#!/bin/bash
-
-if [ $1 == "-find" ]
-then
-	echo `which $2`
-fi

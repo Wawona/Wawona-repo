@@ -1,1 +1,0 @@
-../../../Source/architecture/i386/math.h

@@ -1,8 +1,0 @@
-#!/bin/sh
-
-set -e
-
-if [ "$1" = "remove" ]; then
-    update-alternatives --remove progress @MEMO_PREFIX@@MEMO_SUB_PREFIX@/bin/cv-progress
-fi
-
