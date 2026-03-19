@@ -490,26 +490,28 @@
                 13.0 - 26.0+</b> (Rootless/RootHide) and <b>Android (Termux)</b>, providing specialized software and
             native Wayland utilities.</p>
 
-        <div id="gui-actions" class="actions">
-            <a href="sileo://source/https://repo.wawona.io/" class="btn btn-primary">
-                <img src="images/logo/sileo.png" alt="Sileo"> Add to Sileo
-            </a>
-            <a href="zbra://sources/add/https://repo.wawona.io/" class="btn btn-secondary">
-                <img src="images/logo/zebra.png" alt="Zebra" style="width: 24px; height: 24px;"> Add to Zebra
-            </a>
-        </div>
-
         <div class="setup-container">
             <!-- iOS GUI -->
-            <div id="ios-gui-section" class="platform-section">
-                <div class="summary-content" style="padding: 20px; border-bottom: 1px solid var(--border); cursor: default;">
-                    <div class="summary-icons">
-                        <img src="images/logo/sileo.png" alt="Sileo">
-                        <img src="images/logo/zebra.png" alt="Zebra">
+            <details id="ios-gui-section" class="platform-section">
+                <summary>
+                    <div class="summary-content">
+                        <div class="summary-icons">
+                            <img src="images/logo/sileo.png" alt="Sileo">
+                            <img src="images/logo/zebra.png" alt="Zebra">
+                        </div>
+                        <span id="ios-gui-title">iOS Setup</span>
                     </div>
-                    <span id="ios-gui-title">Manual iOS Setup</span>
-                </div>
+                </summary>
                 <div class="manual-section">
+                    <div id="gui-actions" class="actions" style="margin-bottom: 25px;">
+                        <a href="sileo://source/https://repo.wawona.io/" class="btn btn-primary">
+                            <img src="images/logo/sileo.png" alt="Sileo"> Add to Sileo
+                        </a>
+                        <a href="zbra://sources/add/https://repo.wawona.io/" class="btn btn-secondary">
+                            <img src="images/logo/zebra.png" alt="Zebra" style="width: 24px; height: 24px;"> Add to Zebra
+                        </a>
+                    </div>
+
                     <div class="method-box">
                         <p><strong>Option A: Sileo / Zebra</strong></p>
                         <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px;">Open <strong>Sileo</strong> or <strong>Zebra</strong>, go to Sources, tap "Edit" → "Add", and enter the URL:</p>
@@ -519,7 +521,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </details>
 
             <!-- Unified CLI -->
             <details id="cli-section" class="platform-section">
@@ -597,7 +599,6 @@
         function showAllOptions() {
             const guiSection = document.getElementById('ios-gui-section');
             const cliSection = document.getElementById('cli-section');
-            const guiActions = document.getElementById('gui-actions');
             const cliTitle = document.getElementById('cli-title');
             const guiTitle = document.getElementById('ios-gui-title');
             const cliDesc = document.getElementById('cli-description');
@@ -607,15 +608,12 @@
             const cliTermuxHint = document.getElementById('cli-termux-hint');
 
             guiSection.style.display = 'block';
-            guiActions.style.display = 'flex';
+            guiSection.open = true;
             cliSection.style.display = 'block';
             cliSection.open = true;
             
-            guiTitle.innerHTML = 'Manual iOS Setup';
+            guiTitle.innerHTML = 'iOS Setup';
             cliTitle.innerHTML = 'iOS / Android CLI Setup';
-            
-            if (cliNewTerm) cliNewTerm.style.display = 'inline-block';
-            if (cliTermux) cliTermux.style.display = 'inline-block';
             
             cliDesc.innerHTML = 'The CLI setup is identical for both platforms. On <strong>iOS</strong>, use <a href="https://github.com/hbang/NewTerm" target="_blank" style="color: var(--accent); text-decoration: underline;">NewTerm</a>. On <strong>Android</strong>, use <a href="https://github.com/termux/termux-app#github" target="_blank" style="color: var(--accent); text-decoration: underline;">Termux</a>.';
             cliEditor.innerText = 'deb https://repo.wawona.io/ stable main';
@@ -635,7 +633,6 @@
             
             const guiSection = document.getElementById('ios-gui-section');
             const cliSection = document.getElementById('cli-section');
-            const guiActions = document.getElementById('gui-actions');
             
             const cliTitle = document.getElementById('cli-title');
             const guiTitle = document.getElementById('ios-gui-title');
@@ -654,6 +651,7 @@
             if (ios) {
                 // iOS Experience
                 guiSection.style.display = 'block';
+                guiSection.open = true;
                 guiSection.classList.add('recommended');
                 guiTitle.innerHTML = 'iOS Setup <span class="recommended-badge">(recommended)</span>';
                 cliTitle.innerText = 'iOS CLI Setup';
@@ -675,10 +673,10 @@
 
                 // Hide iOS-specific elements
                 if (guiSection) guiSection.style.display = 'none';
-                if (guiActions) guiActions.style.display = 'none';
             } else {
                 // Desktop/Generic Experience
                 guiSection.style.display = 'block';
+                guiSection.open = true;
                 cliSection.open = true;
                 cliTitle.innerText = 'iOS / Android CLI Setup';
                 if (recomContainer) recomContainer.innerHTML = 'Showing all setup options.';
