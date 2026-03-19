@@ -15,15 +15,13 @@ if [ "$OS_TYPE" = "Android" ]; then
 fi
 
 # Determine Prefix and Source Path
+REPO_URL="https://repo.wawona.io"
 if [ "$IS_ANDROID" = true ]; then
     echo "[+] Detected Android (Termux)"
-    REPO_URL="https://repo.wawona.io/android"
     SOURCE_FILE="$PREFIX/etc/apt/sources.list.d/wawona.list"
 else
     echo "[+] Detected iOS/Darwin"
-    REPO_URL="https://repo.wawona.io"
     # iOS typically uses /etc/apt/sources.list.d/ or similar
-    # We check if we are rootless or rootful
     if [ -d "/var/jb/etc/apt" ]; then
         SOURCE_FILE="/var/jb/etc/apt/sources.list.d/wawona.list"
     else

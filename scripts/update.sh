@@ -5,11 +5,10 @@ set -e
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 ROOT=$(dirname "$SCRIPT_DIR")
 REPO_ROOT="$ROOT"
-IOS_ROOT="$REPO_ROOT" # iOS is now at the root
-ANDROID_ROOT="$REPO_ROOT/android"
 ARCH_IOS_64="iphoneos-arm64"
 ARCH_IOS_64E="iphoneos-arm64e"
 ARCH_ANDROID="aarch64"
+ALL_ARCHS="$ARCH_IOS_64 $ARCH_IOS_64E $ARCH_ANDROID"
 
 # Helpers
 get_size() { stat -c %s "$1" 2>/dev/null || stat -f %z "$1"; }
@@ -37,26 +36,23 @@ patch_roothide() {
     rm -rf "$tmp"
 }
 
-update_dist() {
-    local p_root="$1"
-    local p_name="$2"
-    local p_archs="$3"
-    echo "Updating $p_name index in $p_root..."
+update_repo() {
+    echo "Updating unified repository index at $REPO_ROOT..."
     
-    cd "$p_root"
+    cd "$REPO_ROOT"
     mkdir -p "debs"
     
-    # Scan debs for flat repo (relative to p_root)
+    # Scan ALL debs for universal flat repo
     dpkg-scanpackages -m "debs" /dev/null 2>/dev/null > "Packages"
     sed_i 's/^Roothide: /RootHide: /g' "Packages"
     gzip --no-name -c9 "Packages" > "Packages.gz"
     
-    # Release file (Flat Repository Style)
+    # Unified Release file
     cat > "Release" <<EOF
 Origin: Wawona
-Label: Wawona ($p_name)
-Architectures: $p_archs
-Description: Wawona System Utilities for $p_name
+Label: Wawona
+Architectures: $ALL_ARCHS
+Description: Wawona System Utilities (iOS & Android)
 Date: $(date -R)
 MD5Sum:
  $(md5sum "Packages" | cut -d' ' -f1) $(get_size "Packages") Packages
@@ -66,26 +62,33 @@ EOF
 }
 
 echo "Step 1: Building multi-platform aggregate..."
-nix build .#ios --out-link "$ROOT/result-ios" --no-link || echo "iOS build skipped/failed, using existing debs"
-nix build .#android --out-link "$ROOT/result-android" --no-link || echo "Android build skipped/failed, using existing debs"
+nix build .#ios --out-link "$ROOT/result-ios" --no-link || echo "iOS build skipped"
+nix build .#android --out-link "$ROOT/result-android" --no-link || echo "Android build skipped"
 
 echo "Step 2: Collecting binaries..."
-mkdir -p "$IOS_ROOT/debs" "$ANDROID_ROOT/debs"
-if [ -L "$ROOT/result-ios" ]; then find "$ROOT/result-ios" -name "*.deb" -exec cp -vu {} "$IOS_ROOT/debs/" \; ; fi
-if [ -L "$ROOT/result-android" ]; then find "$ROOT/result-android" -name "*.deb" -exec cp -vu {} "$ANDROID_ROOT/debs/" \; ; fi
+mkdir -p "$REPO_ROOT/debs"
+if [ -L "$ROOT/result-ios" ]; then find "$ROOT/result-ios" -name "*.deb" -exec cp -vu {} "$REPO_ROOT/debs/" \; ; fi
+if [ -L "$ROOT/result-android" ]; then find "$ROOT/result-android" -name "*.deb" -exec cp -vu {} "$REPO_ROOT/debs/" \; ; fi
 
 echo "Step 3: Processing iOS RootHide..."
-mkdir -p "$IOS_ROOT/roothide"
-for deb in "$IOS_ROOT/debs"/*.deb; do [ -e "$deb" ] || continue; patch_roothide "$deb" "$IOS_ROOT/roothide"; done
-cp "$IOS_ROOT/roothide"/*.deb "$IOS_ROOT/debs/" 2>/dev/null || true
+mkdir -p "$REPO_ROOT/roothide"
+for deb in "$REPO_ROOT/debs"/*.deb; do 
+    [[ "$deb" == *"~roothide"* ]] && continue
+    # Only patch if it's an iOS architecture
+    if dpkg-deb -f "$deb" Architecture | grep -q "iphoneos"; then
+        patch_roothide "$deb" "$REPO_ROOT/roothide"
+    fi
+done
+cp "$REPO_ROOT/roothide"/*.deb "$REPO_ROOT/debs/" 2>/dev/null || true
 
-echo "Step 4: Generating Indices..."
-update_dist "$IOS_ROOT" "iOS" "$ARCH_IOS_64 $ARCH_IOS_64E"
-update_dist "$ANDROID_ROOT" "Android" "$ARCH_ANDROID"
+echo "Step 4: Generating Unified Index..."
+update_repo
 
 echo "Step 5: Final Cleanup..."
 if [ -d "$ROOT/repo" ]; then rm -rf "$ROOT/repo" ; fi
-if [ -d "$ROOT/ios" ] && [ "$IOS_ROOT" != "$ROOT/ios" ]; then rm -rf "$ROOT/ios"; fi
+if [ -d "$ROOT/ios" ]; then rm -rf "$ROOT/ios" ; fi
+if [ -d "$ROOT/android" ]; then rm -rf "$ROOT/android" ; fi
+echo "Wawona Repository Unified Successfully."
 
 # Clean up legacy repo directory if it exists
 if [ -d "$ROOT/repo" ]; then rm -rf "$ROOT/repo" ; fi

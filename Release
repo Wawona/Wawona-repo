@@ -1,7 +1,7 @@
 Origin: Wawona
-Label: Wawona (iOS)
-Architectures: iphoneos-arm64 iphoneos-arm64e
-Description: Wawona System Utilities for iOS
+Label: Wawona
+Architectures: iphoneos-arm64 iphoneos-arm64e aarch64
+Description: Wawona System Utilities (iOS & Android)
 Date: Thu, 19 Mar 2026 12:08:35 -0700
 MD5Sum:
  208df9acf1ac0ddf49cec19b7a894bd7 888 Packages
