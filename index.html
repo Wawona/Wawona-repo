@@ -511,8 +511,10 @@
                 </div>
             </details>
 
-            <p id="recom-status" style="font-size: 0.8rem; color: var(--text-dim); margin-top: 30px; opacity: 0.8;">Showing recommended setup options</p>
-            <span id="show-all-btn" style="display: inline-block; margin-top: 8px; font-size: 0.8rem; color: var(--accent); cursor: pointer; text-decoration: none;" onclick="showAllOptions()" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Show All</span>
+            <p id="recom-container" style="font-size: 0.8rem; color: var(--text-dim); margin-top: 30px; opacity: 0.8;">
+                Showing recommended setup options. 
+                <span id="show-all-btn" style="color: var(--accent); cursor: pointer; text-decoration: none;" onclick="showAllOptions()" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Show All</span>
+            </p>
         </div>
 
     </div>
@@ -542,7 +544,7 @@
             const cliTermux = document.getElementById('cli-link-termux');
             const cliDesc = document.getElementById('cli-description');
             const showBtn = document.getElementById('show-all-btn');
-            const recomStatus = document.getElementById('recom-status');
+            const recomContainer = document.getElementById('recom-container');
 
             guiSection.style.display = 'block';
             guiActions.style.display = 'flex';
@@ -560,8 +562,7 @@
             guiSection.classList.remove('recommended');
             cliSection.classList.remove('recommended');
             
-            showBtn.style.display = 'none';
-            if (recomStatus) recomStatus.style.display = 'none';
+            if (recomContainer) recomContainer.style.display = 'none';
         }
 
         function detectOS() {
