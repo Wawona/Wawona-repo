@@ -216,6 +216,93 @@
             margin-bottom: 12px;
         }
 
+        .detection-banner {
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid var(--accent);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
+        }
+
+        .platform-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .platform-section[open] {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        summary {
+            padding: 20px;
+            cursor: pointer;
+            list-style: none; /* Hide default arrow */
+            user-select: none;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .summary-content {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .recommended-badge {
+            display: none;
+            background: var(--accent);
+            color: var(--bg);
+            font-size: 0.6rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: auto;
+            letter-spacing: 0.05rem;
+        }
+
+        .recommended .recommended-badge {
+            display: inline-block;
+        }
+
+        .setup-container {
+            text-align: left;
+        }
+
+        .manual-section {
+            background: transparent;
+            padding: 0 20px 20px 20px;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+
         .method-box {
             text-align: left;
             margin-top: 10px;
@@ -309,50 +396,71 @@
             </a>
         </div>
 
-        <div class="manual-section">
-            <h2>Termux Setup (Android)</h2>
-            <div class="method-box">
-                <p><strong>Option A: One-click CLI</strong></p>
-                <div class="url-box" style="font-size: 0.75rem;">
-                    <span id="termux-cmd">echo "deb https://repo.wawona.io/android stable main" > $PREFIX/etc/apt/sources.list.d/wawona.list && apt update</span>
-                    <button class="copy-btn" onclick="copyText('termux-cmd', 0)">COPY</button>
-                </div>
-            </div>
-            <div class="method-box" style="margin-top: 15px;">
-                <p><strong>Option B: Manual Editor</strong></p>
-                <p style="font-size: 0.8rem; opacity: 0.8;">Run <code>apt edit-sources</code> and add:</p>
-                <div class="url-box" style="font-size: 0.75rem;">
-                    <span id="termux-editor">deb https://repo.wawona.io/android stable main</span>
-                    <button class="copy-btn" onclick="copyText('termux-editor', 1)">COPY</button>
-                </div>
-            </div>
-        </div>
- 
-        <div class="manual-section">
-            <h2>iOS CLI Setup</h2>
-            <div class="method-box">
-                <p><strong>Option A: Direct Command</strong></p>
-                <div class="url-box" style="font-size: 0.75rem;">
-                    <span id="ios-cmd">echo "deb https://repo.wawona.io/ios stable main" | sudo tee /etc/apt/sources.list.d/wawona.list && sudo apt update</span>
-                    <button class="copy-btn" onclick="copyText('ios-cmd', 2)">COPY</button>
-                </div>
-            </div>
-            <div class="method-box" style="margin-top: 15px;">
-                <p><strong>Option B: Manual Editor</strong></p>
-                <p style="font-size: 0.8rem; opacity: 0.8;">Run <code>sudo apt edit-sources</code> and add:</p>
-                <div class="url-box" style="font-size: 0.75rem;">
-                    <span id="ios-editor">deb https://repo.wawona.io/ios stable main</span>
-                    <button class="copy-btn" onclick="copyText('ios-editor', 3)">COPY</button>
-                </div>
-            </div>
+        <div id="detection-banner" class="detection-banner" style="display: none;">
+            <span class="pulse"></span> Recommended for your <span id="detected-os">device</span>
         </div>
 
-        <div class="manual-section">
-            <h2>Sileo / Zebra URL</h2>
-            <div class="url-box">
-                <span id="repo-url">https://repo.wawona.io/ios</span>
-                <button class="copy-btn" onclick="copyText('repo-url', 4)">COPY</button>
-            </div>
+        <div class="setup-container">
+            <details id="ios-section" class="platform-section">
+                <summary>
+                    <div class="summary-content">
+                        <img src="images/logo/sileo.png" alt="iOS" style="height: 24px; vertical-align: middle; margin-right: 12px;">
+                        <span>iOS Setup (Rootless)</span>
+                        <span class="recommended-badge">RECOMMENDED</span>
+                    </div>
+                </summary>
+                <div class="manual-section">
+                    <div class="method-box">
+                        <p><strong>Option A: Sileo / Zebra</strong></p>
+                        <div class="url-box">
+                            <span id="repo-url">https://repo.wawona.io/ios</span>
+                            <button class="copy-btn" onclick="copyText('repo-url', 0)">COPY</button>
+                        </div>
+                    </div>
+                    <div class="method-box" style="margin-top: 15px;">
+                        <p><strong>Option B: Manual Editor</strong></p>
+                        <p style="font-size: 0.8rem; opacity: 0.8;">Run <code>sudo apt edit-sources</code> and add:</p>
+                        <div class="url-box" style="font-size: 0.75rem;">
+                            <span id="ios-editor">deb https://repo.wawona.io/ios stable main</span>
+                            <button class="copy-btn" onclick="copyText('ios-editor', 1)">COPY</button>
+                        </div>
+                    </div>
+                    <div class="method-box" style="margin-top: 15px;">
+                        <p><strong>Option C: Direct Command</strong></p>
+                        <div class="url-box" style="font-size: 0.75rem;">
+                            <span id="ios-cmd">echo "deb https://repo.wawona.io/ios stable main" | sudo tee /etc/apt/sources.list.d/wawona.list && sudo apt update</span>
+                            <button class="copy-btn" onclick="copyText('ios-cmd', 2)">COPY</button>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details id="android-section" class="platform-section">
+                <summary>
+                    <div class="summary-content">
+                        <img src="images/logo/wawona.png" alt="Android" style="height: 24px; vertical-align: middle; margin-right: 12px; filter: grayscale(1) invert(1);">
+                        <span>Termux Setup (Android)</span>
+                        <span class="recommended-badge">RECOMMENDED</span>
+                    </div>
+                </summary>
+                <div class="manual-section">
+                    <div class="method-box">
+                        <p><strong>Option A: One-click CLI</strong></p>
+                        <div class="url-box" style="font-size: 0.75rem;">
+                            <span id="termux-cmd">echo "deb https://repo.wawona.io/android stable main" > $PREFIX/etc/apt/sources.list.d/wawona.list && apt update</span>
+                            <button class="copy-btn" onclick="copyText('termux-cmd', 3)">COPY</button>
+                        </div>
+                    </div>
+                    <div class="method-box" style="margin-top: 15px;">
+                        <p><strong>Option B: Manual Editor</strong></p>
+                        <p style="font-size: 0.8rem; opacity: 0.8;">Run <code>apt edit-sources</code> and add:</p>
+                        <div class="url-box" style="font-size: 0.75rem;">
+                            <span id="termux-editor">deb https://repo.wawona.io/android stable main</span>
+                            <button class="copy-btn" onclick="copyText('termux-editor', 4)">COPY</button>
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
 
     </div>
@@ -371,6 +479,31 @@
                 setTimeout(() => btn.innerText = 'COPY', 2000);
             });
         }
+
+        function detectOS() {
+            const ua = navigator.userAgent.toLowerCase();
+            const ios = /iphone|ipad|ipod/.test(ua);
+            const android = /android/.test(ua);
+            const banner = document.getElementById('detection-banner');
+            const osSpan = document.getElementById('detected-os');
+
+            if (ios) {
+                document.getElementById('ios-section').open = true;
+                document.getElementById('ios-section').classList.add('recommended');
+                osSpan.innerText = 'iOS device';
+                banner.style.display = 'flex';
+            } else if (android) {
+                document.getElementById('android-section').open = true;
+                document.getElementById('android-section').classList.add('recommended');
+                osSpan.innerText = 'Android device';
+                banner.style.display = 'flex';
+            } else {
+                // Default: open iOS
+                document.getElementById('ios-section').open = true;
+            }
+        }
+
+        detectOS();
         document.getElementById('current-year').innerText = new Date().getFullYear();
     </script>
 </body>
