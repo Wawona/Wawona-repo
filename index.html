@@ -240,9 +240,20 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(0, 255, 157, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(0, 255, 157, 0);
+            }
         }
 
         .platform-section {
@@ -262,7 +273,8 @@
         summary {
             padding: 20px;
             cursor: pointer;
-            list-style: none; /* Hide default arrow */
+            list-style: none;
+            /* Hide default arrow */
             user-select: none;
             opacity: 0.5;
             filter: grayscale(1);
@@ -285,6 +297,19 @@
             align-items: center;
             font-size: 1.1rem;
             font-weight: 700;
+        }
+
+        .summary-icons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 12px;
+        }
+
+        .summary-icons img {
+            height: 28px;
+            width: auto;
+            border-radius: 6px;
         }
 
         .recommended-badge {
@@ -334,21 +359,26 @@
             color: var(--accent);
             border: 1px solid rgba(0, 255, 157, 0.1);
             position: relative;
-            overflow: hidden; /* Contains the absolute button */
+            overflow: hidden;
+            /* Contains the absolute button */
         }
 
         .url-box span {
             display: block;
             white-space: nowrap;
             overflow-x: auto;
-            padding-right: 80px; /* Room for the floating button */
+            padding-right: 80px;
+            /* Room for the floating button */
             width: 100%;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
         }
 
         .url-box span::-webkit-scrollbar {
-            display: none; /* Hide scrollbar for Chrome/Safari/Blink */
+            display: none;
+            /* Hide scrollbar for Chrome/Safari/Blink */
         }
 
         .copy-btn {
@@ -367,7 +397,8 @@
             top: 50%;
             transform: translateY(-50%);
             white-space: nowrap;
-            box-shadow: -10px 0 20px var(--url-bg); /* Subtle fade behind button */
+            box-shadow: -10px 0 20px var(--url-bg);
+            /* Subtle fade behind button */
         }
 
         footer {
@@ -406,7 +437,8 @@
         </div>
         <h1>System Utilities Repo</h1>
         <p>Wawona is a high-performance Wayland compositor for iOS, macOS, and Android. This repository supports <b>iOS
-                13.0 - 26.0+</b> (Rootless/RootHide) and <b>Android (Termux)</b>, providing specialized software and native Wayland utilities.</p>
+                13.0 - 26.0+</b> (Rootless/RootHide) and <b>Android (Termux)</b>, providing specialized software and
+            native Wayland utilities.</p>
 
         <div class="actions">
             <a href="sileo://source/https://repo.wawona.io/ios" class="btn btn-primary">
@@ -420,62 +452,62 @@
         </div>
 
         <div class="setup-container">
-            <details id="ios-section" class="platform-section">
+            <!-- iOS GUI Section -->
+            <details id="ios-gui-section" class="platform-section">
                 <summary>
                     <div class="summary-content">
-                        <img src="images/logo/sileo.png" alt="iOS" style="height: 24px; vertical-align: middle; margin-right: 12px;">
-                        <span>iOS Setup (Rootless)</span>
+                        <div class="summary-icons">
+                            <img src="images/logo/sileo.png" alt="Sileo">
+                            <img src="images/logo/zebra.png" alt="Zebra">
+                        </div>
+                        <span>iOS Package Managers</span>
                         <span class="recommended-badge">RECOMMENDED</span>
                     </div>
                 </summary>
                 <div class="manual-section">
                     <div class="method-box">
                         <p><strong>Option A: Sileo / Zebra</strong></p>
+                        <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px;">Open <strong>Sileo</strong> or <strong>Zebra</strong>, go to Sources, tap "Edit" → "Add", and enter the URL:</p>
                         <div class="url-box">
                             <span id="repo-url">https://repo.wawona.io/</span>
                             <button class="copy-btn" onclick="copyText('repo-url', 0)">COPY</button>
                         </div>
                     </div>
-                    <div class="method-box" style="margin-top: 15px;">
-                        <p><strong>Option B: Manual Editor</strong> <span class="recommended-badge" style="display: inline-block; margin-left: 8px;">RECOMMENDED</span></p>
-                        <p style="font-size: 0.8rem; opacity: 0.8;">Run <code>sudo apt edit-sources</code> and add:</p>
-                        <div class="url-box" style="font-size: 0.75rem;">
-                            <span id="ios-editor">deb https://repo.wawona.io/ stable main</span>
-                            <button class="copy-btn" onclick="copyText('ios-editor', 1)">COPY</button>
-                        </div>
-                    </div>
-                    <div class="method-box" style="margin-top: 15px;">
-                        <p><strong>Option C: Direct Command</strong></p>
-                        <div class="url-box" style="font-size: 0.75rem;">
-                            <span id="ios-cmd">echo "deb https://repo.wawona.io/ stable main" | sudo tee /etc/apt/sources.list.d/wawona.list && sudo apt update</span>
-                            <button class="copy-btn" onclick="copyText('ios-cmd', 2)">COPY</button>
-                        </div>
-                    </div>
                 </div>
             </details>
 
-            <details id="android-section" class="platform-section">
+            <!-- Unified CLI Section -->
+            <details id="cli-section" class="platform-section">
                 <summary>
                     <div class="summary-content">
-                        <img src="images/logo/termux.png" alt="Android" style="height: 24px; vertical-align: middle; margin-right: 12px;">
-                        <span>Termux Setup (Android)</span>
+                        <div class="summary-icons">
+                            <img src="images/logo/newterm.png" alt="NewTerm">
+                            <img src="images/logo/termux.png" alt="Termux">
+                        </div>
+                        <span>iOS / Android CLI Setup</span>
                         <span class="recommended-badge">RECOMMENDED</span>
                     </div>
                 </summary>
                 <div class="manual-section">
+                    <p style="font-size: 0.85rem; margin-bottom: 20px; text-align: left;">
+                        The CLI setup is identical for both platforms. On <strong>iOS</strong>, use <strong style="color: var(--accent);">NewTerm</strong>. On <strong>Android</strong>, use <strong style="color: var(--accent);">Termux</strong>.
+                    </p>
+                    
                     <div class="method-box">
-                        <p><strong>Option A: One-click CLI</strong></p>
+                        <p><strong>Option A: Manual Editor</strong> <span class="recommended-badge" style="display: inline-block; margin-left: 8px;">RECOMMENDED</span></p>
+                        <p style="font-size: 0.8rem; opacity: 0.8;">Run <code>sudo apt edit-sources</code> (iOS) or <code>apt edit-sources</code> (Android) and add:</p>
                         <div class="url-box" style="font-size: 0.75rem;">
-                            <span id="termux-cmd">echo "deb https://repo.wawona.io/android stable main" > $PREFIX/etc/apt/sources.list.d/wawona.list && apt update</span>
-                            <button class="copy-btn" onclick="copyText('termux-cmd', 3)">COPY</button>
+                            <span id="cli-editor">deb https://repo.wawona.io/$( [ "$(uname -o)" = "Android" ] && echo "android" || echo "" ) stable main</span>
+                            <button class="copy-btn" onclick="copyText('cli-editor', 1)">COPY</button>
                         </div>
+                        <p style="font-size: 0.7rem; opacity: 0.6; margin-top: 8px;">Note: Use <code>/android</code> suffix only on Termux.</p>
                     </div>
+
                     <div class="method-box" style="margin-top: 15px;">
-                        <p><strong>Option B: Manual Editor</strong> <span class="recommended-badge" style="display: inline-block; margin-left: 8px;">RECOMMENDED</span></p>
-                        <p style="font-size: 0.8rem; opacity: 0.8;">Run <code>apt edit-sources</code> and add:</p>
+                        <p><strong>Option B: One-click CLI</strong></p>
                         <div class="url-box" style="font-size: 0.75rem;">
-                            <span id="termux-editor">deb https://repo.wawona.io/android stable main</span>
-                            <button class="copy-btn" onclick="copyText('termux-editor', 4)">COPY</button>
+                            <span id="cli-cmd">curl -sL https://repo.wawona.io/setup.sh | bash</span>
+                            <button class="copy-btn" onclick="copyText('cli-cmd', 2)">COPY</button>
                         </div>
                     </div>
                 </div>
@@ -505,14 +537,16 @@
             const android = /android/.test(ua);
 
             if (ios) {
-                document.getElementById('ios-section').open = true;
-                document.getElementById('ios-section').classList.add('recommended');
+                document.getElementById('ios-gui-section').open = true;
+                document.getElementById('ios-gui-section').classList.add('recommended');
+                document.getElementById('cli-section').classList.add('recommended');
             } else if (android) {
-                document.getElementById('android-section').open = true;
-                document.getElementById('android-section').classList.add('recommended');
+                document.getElementById('cli-section').open = true;
+                document.getElementById('cli-section').classList.add('recommended');
             } else {
-                // Default: open iOS
-                document.getElementById('ios-section').open = true;
+                // Default: open both
+                document.getElementById('ios-gui-section').open = true;
+                document.getElementById('cli-section').open = true;
             }
         }
 
