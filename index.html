@@ -427,10 +427,17 @@
                 padding: 30px 20px;
             }
         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 0.6; transform: translateY(0); }
+        }
     </style>
 </head>
 
-<body>
+<body style="padding-top: 15px;">
+    <div style="margin-bottom: 20px; font-size: 0.85rem; opacity: 0.6; animation: fadeIn 1s ease;">
+        Looking for Wawona? Visit <a href="https://wawona.io" style="color: var(--accent); text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">wawona.io</a>
+    </div>
     <div class="background-glow"></div>
 
     <div class="container">
@@ -520,7 +527,13 @@
     </div>
 
     <footer>
-        <a href="https://wawona.io" target="_blank">wawona.io</a><br>
+        <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="https://repo.wawona.io" style="color: var(--text-dim); text-decoration: none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-dim)'">repo.wawona.io</a>
+            <span style="opacity: 0.3;">•</span>
+            <a href="https://wawona.io" style="color: var(--text-dim); text-decoration: none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-dim)'">Visit Main Page (wawona.io)</a>
+            <span style="opacity: 0.3;">•</span>
+            <a href="https://github.com/wawona/wawona-repo" target="_blank" style="color: var(--text-dim); text-decoration: none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-dim)'">Visit Source</a>
+        </div>
         &copy; 2025-<span id="current-year"></span> Wawona. MIT Licensed.
     </footer>
 
