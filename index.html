@@ -316,17 +316,29 @@
         .url-box {
             background: var(--url-bg);
             padding: 12px 16px;
-            padding-right: 85px;
             border-radius: 8px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
             color: var(--accent);
             border: 1px solid rgba(0, 255, 157, 0.1);
             position: relative;
-            word-break: break-all;
+            overflow: hidden; /* Contains the absolute button */
+        }
+
+        .url-box span {
+            display: block;
+            white-space: nowrap;
+            overflow-x: auto;
+            padding-right: 80px; /* Room for the floating button */
+            width: 100%;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+        }
+
+        .url-box span::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome/Safari/Blink */
         }
 
         .copy-btn {
@@ -345,6 +357,7 @@
             top: 50%;
             transform: translateY(-50%);
             white-space: nowrap;
+            box-shadow: -10px 0 20px var(--url-bg); /* Subtle fade behind button */
         }
 
         footer {
