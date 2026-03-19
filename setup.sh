@@ -32,37 +32,25 @@ fi
 echo "[+] Adding source: $REPO_URL"
 echo "[+] Target file: $SOURCE_FILE"
 
-# Prepare the source line
-LINE="deb $REPO_URL ./"
+# Prepare the universal trusted source line
+LINE="deb [trusted=yes] $REPO_URL ./"
 
-# Ensure directory exists and handle the file
+# Ensure directory exists and overwrite the file (cleanses legacy broken lines)
 if [ "$IS_ANDROID" = true ]; then
     mkdir -p "$(dirname "$SOURCE_FILE")"
-    if [ -f "$SOURCE_FILE" ] && grep -qxF "$LINE" "$SOURCE_FILE"; then
-        echo "[!] Repository already exists in $SOURCE_FILE"
-    else
-        echo "$LINE" >> "$SOURCE_FILE"
-        echo "[+] Repository added to $SOURCE_FILE"
-    fi
+    echo "$LINE" > "$SOURCE_FILE"
+    echo "[+] Repository updated in $SOURCE_FILE"
 else
     # iOS - handle sudo
     DIR=$(dirname "$SOURCE_FILE")
     if [ "$(id -u)" -ne 0 ]; then
         sudo mkdir -p "$DIR"
-        if [ -f "$SOURCE_FILE" ] && grep -qxF "$LINE" "$SOURCE_FILE"; then
-            echo "[!] Repository already exists in $SOURCE_FILE"
-        else
-            echo "$LINE" | sudo tee -a "$SOURCE_FILE" > /dev/null
-            echo "[+] Repository added to $SOURCE_FILE"
-        fi
+        echo "$LINE" | sudo tee "$SOURCE_FILE" > /dev/null
+        echo "[+] Repository updated in $SOURCE_FILE"
     else
         mkdir -p "$DIR"
-        if [ -f "$SOURCE_FILE" ] && grep -qxF "$LINE" "$SOURCE_FILE"; then
-            echo "[!] Repository already exists in $SOURCE_FILE"
-        else
-            echo "$LINE" >> "$SOURCE_FILE"
-            echo "[+] Repository added to $SOURCE_FILE"
-        fi
+        echo "$LINE" > "$SOURCE_FILE"
+        echo "[+] Repository updated in $SOURCE_FILE"
     fi
 fi
 

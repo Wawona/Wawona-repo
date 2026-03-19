@@ -657,7 +657,7 @@
                 cliTitle.innerText = 'iOS CLI Setup';
                 if (cliTermux) cliTermux.style.display = 'none';
                 cliDesc.innerHTML = 'On <strong>iOS</strong>, use <a href="https://github.com/hbang/NewTerm" target="_blank" style="color: var(--accent); text-decoration: underline;">NewTerm</a> to manage your wayland utilities.';
-                cliEditor.innerText = 'deb https://repo.wawona.io/ ./';
+                cliEditor.innerText = 'deb [trusted=yes] https://repo.wawona.io/ ./';
                 cliEditorHint.innerHTML = 'Run <code>sudo apt edit-sources</code> and add to the file:';
                 if (cliTermuxHint) cliTermuxHint.style.display = 'none';
             } else if (android) {
@@ -667,7 +667,7 @@
                 cliTitle.innerHTML = 'Android Setup <span class="recommended-badge">(recommended)</span>';
                 if (cliNewTerm) cliNewTerm.style.display = 'none';
                 cliDesc.innerHTML = 'On <strong>Android</strong>, use <a href="https://github.com/termux/termux-app#github" target="_blank" style="color: var(--accent); text-decoration: underline;">Termux</a> to manage your wayland utilities.';
-                cliEditor.innerText = 'deb https://repo.wawona.io/ ./';
+                cliEditor.innerText = 'deb [trusted=yes] https://repo.wawona.io/ ./';
                 cliEditorHint.innerHTML = 'Run <code>apt edit-sources</code> and add to the file:';
                 if (cliTermuxHint) cliTermuxHint.style.display = 'block';
 
