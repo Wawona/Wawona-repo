@@ -543,7 +543,6 @@
             const cliNewTerm = document.getElementById('cli-link-newterm');
             const cliTermux = document.getElementById('cli-link-termux');
             const cliDesc = document.getElementById('cli-description');
-            const showBtn = document.getElementById('show-all-btn');
             const recomContainer = document.getElementById('recom-container');
 
             guiSection.style.display = 'block';
@@ -562,7 +561,7 @@
             guiSection.classList.remove('recommended');
             cliSection.classList.remove('recommended');
             
-            if (recomContainer) recomContainer.style.display = 'none';
+            if (recomContainer) recomContainer.innerHTML = 'Showing all setup options.';
         }
 
         function detectOS() {
@@ -579,6 +578,7 @@
             const cliNewTerm = document.getElementById('cli-link-newterm');
             const cliTermux = document.getElementById('cli-link-termux');
             const cliDesc = document.getElementById('cli-description');
+            const recomContainer = document.getElementById('recom-container');
 
             // Reset recommendations
             guiSection.classList.remove('recommended');
@@ -608,7 +608,7 @@
                 guiSection.style.display = 'block';
                 cliSection.open = true;
                 cliTitle.innerText = 'iOS / Android CLI Setup';
-                document.getElementById('show-all-btn').style.display = 'none';
+                if (recomContainer) recomContainer.innerHTML = 'Showing all setup options.';
             }
         }
 
