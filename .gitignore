@@ -1,2 +1,4 @@
 result/Procursus-roothide/
 Procursus-roothide/
+result*
+.direnv/
