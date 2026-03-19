@@ -409,10 +409,6 @@
             </a>
         </div>
 
-        <div id="detection-banner" class="detection-banner" style="display: none;">
-            <span class="pulse"></span> Recommended for your <span id="detected-os">device</span>
-        </div>
-
         <div class="setup-container">
             <details id="ios-section" class="platform-section">
                 <summary>
@@ -497,19 +493,13 @@
             const ua = navigator.userAgent.toLowerCase();
             const ios = /iphone|ipad|ipod/.test(ua);
             const android = /android/.test(ua);
-            const banner = document.getElementById('detection-banner');
-            const osSpan = document.getElementById('detected-os');
 
             if (ios) {
                 document.getElementById('ios-section').open = true;
                 document.getElementById('ios-section').classList.add('recommended');
-                osSpan.innerText = 'iOS device';
-                banner.style.display = 'flex';
             } else if (android) {
                 document.getElementById('android-section').open = true;
                 document.getElementById('android-section').classList.add('recommended');
-                osSpan.innerText = 'Android device';
-                banner.style.display = 'flex';
             } else {
                 // Default: open iOS
                 document.getElementById('ios-section').open = true;
