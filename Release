@@ -2,7 +2,7 @@ Origin: Wawona
 Label: Wawona (iOS)
 Architectures: iphoneos-arm64 iphoneos-arm64e
 Description: Wawona System Utilities for iOS
-Date: $(date -R)
+Date: Thu, 19 Mar 2026 12:08:35 -0700
 MD5Sum:
  208df9acf1ac0ddf49cec19b7a894bd7 888 Packages
  16cd75ee49f1a37daa65467bbbfa61d2 456 Packages.gz
