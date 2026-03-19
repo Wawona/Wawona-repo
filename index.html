@@ -444,31 +444,8 @@
             <a href="sileo://source/https://repo.wawona.io/ios" class="btn btn-primary">
                 <img src="images/logo/sileo.png" alt="Sileo">
                 Add to Sileo
-            </a>
-            <a href="zebra://sources/add/https://repo.wawona.io/ios" class="btn btn-secondary">
-                <img src="images/logo/zebra.svg" alt="Zebra">
-                Add to Zebra
-            </a>
-        </div>
-
         <div class="setup-container">
-            <!-- Primary Setup (Populated by JS) -->
-            <div id="primary-setup"></div>
-
-            <!-- Alternative Options -->
-            <details id="other-platforms" class="platform-section" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05);">
-                <summary style="opacity: 0.4; font-size: 0.9rem; padding: 15px 20px;">
-                    <div class="summary-content">
-                        <span>Show setup for other platforms</span>
-                    </div>
-                </summary>
-                <div id="secondary-setup" style="padding: 10px 0;"></div>
-            </details>
-        </div>
-
-        <!-- Hidden Templates for JS -->
-        <div style="display: none;">
-            <!-- iOS GUI Template -->
+            <!-- iOS GUI -->
             <details id="ios-gui-section" class="platform-section">
                 <summary>
                     <div class="summary-content">
@@ -476,7 +453,7 @@
                             <img src="images/logo/sileo.png" alt="Sileo">
                             <img src="images/logo/zebra.png" alt="Zebra">
                         </div>
-                        <span>iOS Package Managers</span>
+                        <span>Manual iOS Setup</span>
                         <span class="recommended-badge">RECOMMENDED</span>
                     </div>
                 </summary>
@@ -492,7 +469,7 @@
                 </div>
             </details>
 
-            <!-- Unified CLI Template -->
+            <!-- Unified CLI -->
             <details id="cli-section" class="platform-section">
                 <summary>
                     <div class="summary-content">
@@ -500,7 +477,7 @@
                             <a href="https://github.com/hbang/NewTerm" target="_blank" title="NewTerm on GitHub"><img src="images/logo/newterm.png" alt="NewTerm"></a>
                             <a href="https://github.com/termux/termux-app#github" target="_blank" title="Termux on GitHub"><img src="images/logo/termux.png" alt="Termux"></a>
                         </div>
-                        <span>iOS / Android CLI Setup</span>
+                        <span>Manual Android Setup</span>
                         <span class="recommended-badge">RECOMMENDED</span>
                     </div>
                 </summary>
@@ -510,7 +487,7 @@
                     </p>
                     
                     <div class="method-box">
-                        <p><strong>Option A: Manual Editor</strong> <span class="recommended-badge" style="display: inline-block; margin-left: 8px;">RECOMMENDED</span></p>
+                        <p><strong>Option B: Manual Editor</strong> <span class="recommended-badge" style="display: inline-block; margin-left: 8px;">RECOMMENDED</span></p>
                         <p style="font-size: 0.8rem; opacity: 0.8;">Run <code>sudo apt edit-sources</code> (iOS) or <code>apt edit-sources</code> (Android) and add:</p>
                         <div class="url-box" style="font-size: 0.75rem;">
                             <span id="cli-editor">deb https://repo.wawona.io/$( [ "$(uname -o)" = "Android" ] && echo "android" || echo "" ) stable main</span>
@@ -554,26 +531,23 @@
             
             const guiSection = document.getElementById('ios-gui-section');
             const cliSection = document.getElementById('cli-section');
-            const primary = document.getElementById('primary-setup');
-            const secondary = document.getElementById('secondary-setup');
+            const guiActions = document.getElementById('gui-actions');
 
             if (ios) {
-                primary.appendChild(guiSection);
-                secondary.appendChild(cliSection);
                 guiSection.open = true;
                 guiSection.classList.add('recommended');
+                cliSection.classList.add('recommended');
             } else if (android) {
-                primary.appendChild(cliSection);
-                secondary.appendChild(guiSection);
                 cliSection.open = true;
                 cliSection.classList.add('recommended');
+                // Hide iOS-only buttons
+                if (guiActions) guiActions.style.display = 'none';
             } else {
-                // Default: show both
-                primary.appendChild(guiSection);
-                primary.appendChild(cliSection);
+                // Default: open both
                 guiSection.open = true;
+                cliSection.open = true;
                 guiSection.classList.add('recommended');
-                document.getElementById('other-platforms').style.display = 'none';
+                cliSection.classList.add('recommended');
             }
         }
 
