@@ -265,6 +265,12 @@
             transition: all 0.3s ease;
         }
 
+        .platform-section.recommended {
+            border-color: var(--accent);
+            opacity: 1;
+            filter: grayscale(0);
+        }
+
         .platform-section[open] {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(255, 255, 255, 0.2);
@@ -274,7 +280,6 @@
             padding: 20px;
             cursor: pointer;
             list-style: none;
-            /* Hide default arrow */
             user-select: none;
             opacity: 0.5;
             filter: grayscale(1);
@@ -451,17 +456,15 @@
 
         <div class="setup-container">
             <!-- iOS GUI -->
-            <details id="ios-gui-section" class="platform-section">
-                <summary>
-                    <div class="summary-content">
-                        <div class="summary-icons">
-                            <img src="images/logo/sileo.png" alt="Sileo">
-                            <img src="images/logo/zebra.png" alt="Zebra">
-                        </div>
-                        <span>Manual iOS Setup</span>
-                        <span class="recommended-badge">RECOMMENDED</span>
+            <div id="ios-gui-section" class="platform-section">
+                <div class="summary-content" style="padding: 20px; border-bottom: 1px solid var(--border); cursor: default;">
+                    <div class="summary-icons">
+                        <img src="images/logo/sileo.png" alt="Sileo">
+                        <img src="images/logo/zebra.png" alt="Zebra">
                     </div>
-                </summary>
+                    <span>Manual iOS Setup</span>
+                    <span class="recommended-badge">RECOMMENDED</span>
+                </div>
                 <div class="manual-section">
                     <div class="method-box">
                         <p><strong>Option A: Sileo / Zebra</strong></p>
@@ -472,7 +475,7 @@
                         </div>
                     </div>
                 </div>
-            </details>
+            </div>
 
             <!-- Unified CLI -->
             <details id="cli-section" class="platform-section">
@@ -549,7 +552,7 @@
 
             if (ios) {
                 // iOS Experience
-                guiSection.open = true;
+                guiSection.style.display = 'block';
                 guiSection.classList.add('recommended');
                 cliTitle.innerText = 'iOS CLI Setup';
                 if (cliTermux) cliTermux.style.display = 'none';
@@ -567,7 +570,7 @@
                 if (guiActions) guiActions.style.display = 'none';
             } else {
                 // Desktop/Generic Experience
-                guiSection.open = true;
+                guiSection.style.display = 'block';
                 cliSection.open = true;
                 cliTitle.innerText = 'iOS / Android CLI Setup';
             }
