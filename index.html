@@ -452,7 +452,23 @@
         </div>
 
         <div class="setup-container">
-            <!-- iOS GUI Section -->
+            <!-- Primary Setup (Populated by JS) -->
+            <div id="primary-setup"></div>
+
+            <!-- Alternative Options -->
+            <details id="other-platforms" class="platform-section" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05);">
+                <summary style="opacity: 0.4; font-size: 0.9rem; padding: 15px 20px;">
+                    <div class="summary-content">
+                        <span>Show setup for other platforms</span>
+                    </div>
+                </summary>
+                <div id="secondary-setup" style="padding: 10px 0;"></div>
+            </details>
+        </div>
+
+        <!-- Hidden Templates for JS -->
+        <div style="display: none;">
+            <!-- iOS GUI Template -->
             <details id="ios-gui-section" class="platform-section">
                 <summary>
                     <div class="summary-content">
@@ -476,7 +492,7 @@
                 </div>
             </details>
 
-            <!-- Unified CLI Section -->
+            <!-- Unified CLI Template -->
             <details id="cli-section" class="platform-section">
                 <summary>
                     <div class="summary-content">
@@ -535,18 +551,29 @@
             const ua = navigator.userAgent.toLowerCase();
             const ios = /iphone|ipad|ipod/.test(ua);
             const android = /android/.test(ua);
+            
+            const guiSection = document.getElementById('ios-gui-section');
+            const cliSection = document.getElementById('cli-section');
+            const primary = document.getElementById('primary-setup');
+            const secondary = document.getElementById('secondary-setup');
 
             if (ios) {
-                document.getElementById('ios-gui-section').open = true;
-                document.getElementById('ios-gui-section').classList.add('recommended');
-                document.getElementById('cli-section').classList.add('recommended');
+                primary.appendChild(guiSection);
+                secondary.appendChild(cliSection);
+                guiSection.open = true;
+                guiSection.classList.add('recommended');
             } else if (android) {
-                document.getElementById('cli-section').open = true;
-                document.getElementById('cli-section').classList.add('recommended');
+                primary.appendChild(cliSection);
+                secondary.appendChild(guiSection);
+                cliSection.open = true;
+                cliSection.classList.add('recommended');
             } else {
-                // Default: open both
-                document.getElementById('ios-gui-section').open = true;
-                document.getElementById('cli-section').open = true;
+                // Default: show both
+                primary.appendChild(guiSection);
+                primary.appendChild(cliSection);
+                guiSection.open = true;
+                guiSection.classList.add('recommended');
+                document.getElementById('other-platforms').style.display = 'none';
             }
         }
 
