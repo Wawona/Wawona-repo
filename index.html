@@ -406,29 +406,68 @@
         }
 
         footer {
-            margin-top: 25px;
+            margin-top: 50px;
+            width: 100%;
+            max-width: 480px;
+            padding: 30px 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.85rem;
             color: var(--text-dim);
-            font-size: 0.8rem;
-            line-height: 1.6;
+            line-height: 1.8;
+            animation: fadeIn 1.2s ease;
         }
 
-        footer a {
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+            margin-bottom: 12px;
+            font-weight: 800;
+            opacity: 0.8;
+        }
+
+        .footer-column a {
+            display: block;
             color: var(--accent);
             text-decoration: none;
-            font-weight: 600;
+            margin-bottom: 6px;
+            transition: all 0.2s ease;
+            font-weight: 500;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .footer-column a:hover {
+            color: var(--primary);
+            transform: translateX(3px);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            opacity: 0.6;
+            font-size: 0.75rem;
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-column a:hover {
+                transform: scale(1.05);
             }
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 0.6; transform: translateY(0); }
         }
     </style>
@@ -527,14 +566,22 @@
     </div>
 
     <footer>
-        <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <a href="https://repo.wawona.io" style="color: var(--text-dim); text-decoration: none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-dim)'">repo.wawona.io</a>
-            <span style="opacity: 0.3;">•</span>
-            <a href="https://wawona.io" style="color: var(--text-dim); text-decoration: none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-dim)'">Visit Main Page (wawona.io)</a>
-            <span style="opacity: 0.3;">•</span>
-            <a href="https://github.com/wawona/wawona-repo" target="_blank" style="color: var(--text-dim); text-decoration: none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-dim)'">Visit Source</a>
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>Ecosystem</h3>
+                <a href="https://wawona.io">wawona.io</a>
+                <a href="https://wawona.io" style="font-size: 0.75rem; opacity: 0.8;">Visit Main Page</a>
+            </div>
+            <div class="footer-column">
+                <h3>Distribution</h3>
+                <a href="https://repo.wawona.io">repo.wawona.io</a>
+                <a href="https://github.com/wawona/wawona-repo" target="_blank" style="font-size: 0.75rem; opacity: 0.8;">Visit Source Code</a>
+            </div>
         </div>
-        &copy; 2025-<span id="current-year"></span> Wawona. MIT Licensed.
+        <div class="footer-bottom">
+            &copy; 2025-<span id="current-year"></span> Wawona Project. Licensed under MIT.<br>
+            Designed for high-performance Wayland delivery.
+        </div>
     </footer>
 
     <script>
