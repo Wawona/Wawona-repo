@@ -1,11 +1,8 @@
 Origin: Wawona
 Label: Wawona (iOS)
-Suite: stable
-Codename: stable
 Architectures: iphoneos-arm64 iphoneos-arm64e
-Components: main
 Description: Wawona System Utilities for iOS
-Date: Thu, 19 Mar 2026 09:30:42 -0700
+Date: $(date -R)
 MD5Sum:
  208df9acf1ac0ddf49cec19b7a894bd7 888 Packages
  16cd75ee49f1a37daa65467bbbfa61d2 456 Packages.gz

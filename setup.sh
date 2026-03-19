@@ -35,7 +35,7 @@ echo "[+] Adding source: $REPO_URL"
 echo "[+] Target file: $SOURCE_FILE"
 
 # Prepare the source line
-LINE="deb $REPO_URL stable main"
+LINE="deb $REPO_URL ./"
 
 # Ensure directory exists and handle the file
 if [ "$IS_ANDROID" = true ]; then
