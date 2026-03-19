@@ -4,7 +4,7 @@ set -e
 # Path setup
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 ROOT=$(dirname "$SCRIPT_DIR")
-REPO_ROOT="$ROOT/repo"
+REPO_ROOT="$ROOT" # Use repo root for Sileo compatibility
 SUITE="stable"
 IOS_ROOT="$REPO_ROOT/ios"
 ANDROID_ROOT="$REPO_ROOT/android"
@@ -42,24 +42,26 @@ update_dist() {
     local p_root="$1"
     local p_name="$2"
     local p_archs="$3"
+    local p_rel="${p_root#$REPO_ROOT/}" # Relative path from root
     echo "Updating $p_name index..."
-    cd "$p_root"
-    mkdir -p dists/"$SUITE"/main/
-    for arch in $p_archs; do mkdir -p dists/"$SUITE"/main/binary-"$arch"; done
     
-    # Scan debs
-    dpkg-scanpackages -m ./debs /dev/null 2>/dev/null > Packages
-    sed_i 's/^Roothide: /RootHide: /g' Packages
-    gzip --no-name -c9 Packages > Packages.gz
+    cd "$REPO_ROOT"
+    mkdir -p "$p_root/dists/$SUITE/main/"
+    for arch in $p_archs; do mkdir -p "$p_root/dists/$SUITE/main/binary-$arch"; done
+    
+    # Scan debs from root to get correct relative paths
+    dpkg-scanpackages -m "$p_rel/debs" /dev/null 2>/dev/null > "$p_root/Packages"
+    sed_i 's/^Roothide: /RootHide: /g' "$p_root/Packages"
+    gzip --no-name -c9 "$p_root/Packages" > "$p_root/Packages.gz"
     
     # Spread to arch dirs
     for arch in $p_archs; do
-        cp Packages dists/"$SUITE"/main/binary-"$arch"/Packages
-        gzip --no-name -c9 Packages > dists/"$SUITE"/main/binary-"$arch"/Packages.gz
+        cp "$p_root/Packages" "$p_root/dists/$SUITE/main/binary-$arch/Packages"
+        gzip --no-name -c9 "$p_root/Packages" > "$p_root/dists/$SUITE/main/binary-$arch/Packages.gz"
     done
     
     # Release file
-    cat > Release <<EOF
+    cat > "$p_root/Release" <<EOF
 Origin: Wawona
 Label: Wawona ($p_name)
 Suite: $SUITE
@@ -69,8 +71,8 @@ Components: main
 Description: Wawona System Utilities for $p_name
 Date: $(date -R)
 MD5Sum:
- $(md5sum Packages | cut -d' ' -f1) $(get_size Packages) Packages
- $(md5sum Packages.gz | cut -d' ' -f1) $(get_size Packages.gz) Packages.gz
+ $(md5sum "$p_root/Packages" | cut -d' ' -f1) $(get_size "$p_root/Packages") Packages
+ $(md5sum "$p_root/Packages.gz" | cut -d' ' -f1) $(get_size "$p_root/Packages.gz") Packages.gz
 EOF
 }
 
@@ -93,12 +95,14 @@ update_dist "$IOS_ROOT" "iOS" "$ARCH_IOS_64 $ARCH_IOS_64E"
 update_dist "$ANDROID_ROOT" "Android" "$ARCH_ANDROID"
 
 echo "Step 5: Sileo Root Compatibility..."
-# Copy iOS indices to root for Sileo expectations
+# Copy iOS indices to top root for Sileo expectations at repo.wawona.io/
 cp "$IOS_ROOT/Packages" "$REPO_ROOT/Packages"
 cp "$IOS_ROOT/Packages.gz" "$REPO_ROOT/Packages.gz"
 cp "$IOS_ROOT/Release" "$REPO_ROOT/Release"
-# Note: Sileo often looks for 'Release' (singular) or 'Releases' (plural)
 cp "$IOS_ROOT/Release" "$REPO_ROOT/Releases"
+
+# Clean up legacy repo directory if it exists
+if [ -d "$ROOT/repo" ]; then rm -rf "$ROOT/repo" ; fi
 
 cd "$ROOT"
 if [ -d ".git" ]; then git add repo/ ; fi

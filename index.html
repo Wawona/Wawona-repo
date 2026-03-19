@@ -413,7 +413,7 @@
                     <div class="method-box">
                         <p><strong>Option A: Sileo / Zebra</strong></p>
                         <div class="url-box">
-                            <span id="repo-url">https://repo.wawona.io/ios</span>
+                            <span id="repo-url">https://repo.wawona.io/</span>
                             <button class="copy-btn" onclick="copyText('repo-url', 0)">COPY</button>
                         </div>
                     </div>
@@ -421,14 +421,14 @@
                         <p><strong>Option B: Manual Editor</strong></p>
                         <p style="font-size: 0.8rem; opacity: 0.8;">Run <code>sudo apt edit-sources</code> and add:</p>
                         <div class="url-box" style="font-size: 0.75rem;">
-                            <span id="ios-editor">deb https://repo.wawona.io/ios stable main</span>
+                            <span id="ios-editor">deb https://repo.wawona.io/ stable main</span>
                             <button class="copy-btn" onclick="copyText('ios-editor', 1)">COPY</button>
                         </div>
                     </div>
                     <div class="method-box" style="margin-top: 15px;">
                         <p><strong>Option C: Direct Command</strong></p>
                         <div class="url-box" style="font-size: 0.75rem;">
-                            <span id="ios-cmd">echo "deb https://repo.wawona.io/ios stable main" | sudo tee /etc/apt/sources.list.d/wawona.list && sudo apt update</span>
+                            <span id="ios-cmd">echo "deb https://repo.wawona.io/ stable main" | sudo tee /etc/apt/sources.list.d/wawona.list && sudo apt update</span>
                             <button class="copy-btn" onclick="copyText('ios-cmd', 2)">COPY</button>
                         </div>
                     </div>
