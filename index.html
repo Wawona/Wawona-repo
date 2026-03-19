@@ -264,6 +264,16 @@
             cursor: pointer;
             list-style: none; /* Hide default arrow */
             user-select: none;
+            opacity: 0.5;
+            filter: grayscale(1);
+            transition: all 0.3s ease;
+        }
+
+        .platform-section.recommended summary,
+        .platform-section:hover summary,
+        .platform-section[open] summary {
+            opacity: 1;
+            filter: grayscale(0);
         }
 
         summary::-webkit-details-marker {
