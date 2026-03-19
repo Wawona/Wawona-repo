@@ -32,16 +32,39 @@ else
 fi
 
 echo "[+] Adding source: $REPO_URL"
+echo "[+] Target file: $SOURCE_FILE"
 
-# Create sources.list.d entry
+# Prepare the source line
+LINE="deb $REPO_URL stable main"
+
+# Ensure directory exists and handle the file
 if [ "$IS_ANDROID" = true ]; then
-    echo "deb $REPO_URL stable main" > "$SOURCE_FILE"
-else
-    # iOS might need sudo if not root
-    if [ "$(id -u)" -ne 0 ]; then
-        echo "deb $REPO_URL stable main" | sudo tee "$SOURCE_FILE" > /dev/null
+    mkdir -p "$(dirname "$SOURCE_FILE")"
+    if [ -f "$SOURCE_FILE" ] && grep -qxF "$LINE" "$SOURCE_FILE"; then
+        echo "[!] Repository already exists in $SOURCE_FILE"
     else
-        echo "deb $REPO_URL stable main" > "$SOURCE_FILE"
+        echo "$LINE" >> "$SOURCE_FILE"
+        echo "[+] Repository added to $SOURCE_FILE"
+    fi
+else
+    # iOS - handle sudo
+    DIR=$(dirname "$SOURCE_FILE")
+    if [ "$(id -u)" -ne 0 ]; then
+        sudo mkdir -p "$DIR"
+        if [ -f "$SOURCE_FILE" ] && grep -qxF "$LINE" "$SOURCE_FILE"; then
+            echo "[!] Repository already exists in $SOURCE_FILE"
+        else
+            echo "$LINE" | sudo tee -a "$SOURCE_FILE" > /dev/null
+            echo "[+] Repository added to $SOURCE_FILE"
+        fi
+    else
+        mkdir -p "$DIR"
+        if [ -f "$SOURCE_FILE" ] && grep -qxF "$LINE" "$SOURCE_FILE"; then
+            echo "[!] Repository already exists in $SOURCE_FILE"
+        else
+            echo "$LINE" >> "$SOURCE_FILE"
+            echo "[+] Repository added to $SOURCE_FILE"
+        fi
     fi
 fi
 
