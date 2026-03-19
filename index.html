@@ -474,10 +474,10 @@
                 <summary>
                     <div class="summary-content">
                         <div class="summary-icons">
-                            <a href="https://github.com/hbang/NewTerm" target="_blank" title="NewTerm on GitHub"><img src="images/logo/newterm.png" alt="NewTerm"></a>
-                            <a href="https://github.com/termux/termux-app#github" target="_blank" title="Termux on GitHub"><img src="images/logo/termux.png" alt="Termux"></a>
+                            <a id="cli-link-newterm" href="https://github.com/hbang/NewTerm" target="_blank" title="NewTerm on GitHub"><img src="images/logo/newterm.png" alt="NewTerm"></a>
+                            <a id="cli-link-termux" href="https://github.com/termux/termux-app#github" target="_blank" title="Termux on GitHub"><img src="images/logo/termux.png" alt="Termux"></a>
                         </div>
-                        <span>Manual Android Setup</span>
+                        <span id="cli-title">Manual Android Setup</span>
                         <span class="recommended-badge">RECOMMENDED</span>
                     </div>
                 </summary>
@@ -532,22 +532,35 @@
             const guiSection = document.getElementById('ios-gui-section');
             const cliSection = document.getElementById('cli-section');
             const guiActions = document.getElementById('gui-actions');
+            
+            const cliTitle = document.getElementById('cli-title');
+            const cliNewTerm = document.getElementById('cli-link-newterm');
+            const cliTermux = document.getElementById('cli-link-termux');
 
             if (ios) {
+                // iOS Experience
                 guiSection.open = true;
                 guiSection.classList.add('recommended');
                 cliSection.classList.add('recommended');
+                cliTitle.innerText = 'iOS CLI Setup';
+                if (cliTermux) cliTermux.style.display = 'none';
             } else if (android) {
+                // Android Experience
                 cliSection.open = true;
                 cliSection.classList.add('recommended');
-                // Hide iOS-only buttons
+                cliTitle.innerText = 'Android CLI Setup';
+                if (cliNewTerm) cliNewTerm.style.display = 'none';
+                
+                // Hide iOS-specific elements
+                if (guiSection) guiSection.style.display = 'none';
                 if (guiActions) guiActions.style.display = 'none';
             } else {
-                // Default: open both
+                // Desktop/Generic Experience
                 guiSection.open = true;
                 cliSection.open = true;
                 guiSection.classList.add('recommended');
                 cliSection.classList.add('recommended');
+                cliTitle.innerText = 'iOS / Android CLI Setup';
             }
         }
 
