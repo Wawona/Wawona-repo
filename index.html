@@ -487,7 +487,7 @@
                     </div>
                 </summary>
                 <div class="manual-section">
-                    <p style="font-size: 0.85rem; margin-bottom: 20px; text-align: left;">
+                    <p id="cli-description" style="font-size: 0.85rem; margin-bottom: 20px; text-align: left;">
                         The CLI setup is identical for both platforms. On <strong>iOS</strong>, use <a href="https://github.com/hbang/NewTerm" target="_blank" style="color: var(--accent); text-decoration: underline;">NewTerm</a>. On <strong>Android</strong>, use <a href="https://github.com/termux/termux-app#github" target="_blank" style="color: var(--accent); text-decoration: underline;">Termux</a>.
                     </p>
                     
@@ -541,6 +541,7 @@
             const cliTitle = document.getElementById('cli-title');
             const cliNewTerm = document.getElementById('cli-link-newterm');
             const cliTermux = document.getElementById('cli-link-termux');
+            const cliDesc = document.getElementById('cli-description');
 
             if (ios) {
                 // iOS Experience
@@ -549,12 +550,14 @@
                 cliSection.classList.add('recommended');
                 cliTitle.innerText = 'iOS CLI Setup';
                 if (cliTermux) cliTermux.style.display = 'none';
+                cliDesc.innerHTML = 'On <strong>iOS</strong>, use <a href="https://github.com/hbang/NewTerm" target="_blank" style="color: var(--accent); text-decoration: underline;">NewTerm</a> to manage your wayland utilities.';
             } else if (android) {
                 // Android Experience
                 cliSection.open = true;
                 cliSection.classList.add('recommended');
                 cliTitle.innerText = 'Android CLI Setup';
                 if (cliNewTerm) cliNewTerm.style.display = 'none';
+                cliDesc.innerHTML = 'On <strong>Android</strong>, use <a href="https://github.com/termux/termux-app#github" target="_blank" style="color: var(--accent); text-decoration: underline;">Termux</a> to manage your wayland utilities.';
                 
                 // Hide iOS-specific elements
                 if (guiSection) guiSection.style.display = 'none';
