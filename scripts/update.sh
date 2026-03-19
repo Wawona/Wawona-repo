@@ -47,16 +47,22 @@ update_repo() {
     sed_i 's/^Roothide: /RootHide: /g' "Packages"
     gzip --no-name -c9 "Packages" > "Packages.gz"
     
-    # Unified Release file
+    # Unified Release file with MD5 and SHA256
     cat > "Release" <<EOF
 Origin: Wawona
 Label: Wawona
+Suite: stable
+Codename: stable
 Architectures: $ALL_ARCHS
+Components: main
 Description: Wawona System Utilities (iOS & Android)
 Date: $(date -R)
 MD5Sum:
  $(md5sum "Packages" | cut -d' ' -f1) $(get_size "Packages") Packages
  $(md5sum "Packages.gz" | cut -d' ' -f1) $(get_size "Packages.gz") Packages.gz
+SHA256:
+ $(shasum -a 256 "Packages" | cut -d' ' -f1) $(get_size "Packages") Packages
+ $(shasum -a 256 "Packages.gz" | cut -d' ' -f1) $(get_size "Packages.gz") Packages.gz
 EOF
     cp "Release" "Releases"
 }
