@@ -19,7 +19,7 @@ mkWawonaPackage rec {
     ./patches/fix-pwd_mkdb-comment-handling.diff
   ];
 
-  buildInputs = with pkgs; [ libxcrypt openpam ncurses ] ++ [ libiosexec ];
+  buildInputs = with pkgs; [ openpam ncurses ] ++ [ libiosexec ] ++ (lib.optional (target == "android") libxcrypt);
 
   preConfigure = ''
     sed -i '/#include <stdio.h>/a #include <crypt.h>' login.tproj/login.c
@@ -90,3 +90,4 @@ mkWawonaPackage rec {
     ln -s $out${prefix}/usr/bin/arch $out${prefix}/usr/bin/machine
     ln -s $out${prefix}/sbin/reboot $out${prefix}/sbin/halt
   '';
+}

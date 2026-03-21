@@ -1,34 +1,29 @@
+{ pkgs, mkWawonaPackage, target ? "ios" }:
 
-{ pkgs, fetchurl, buildPackages, mainPkgs }:
-
-pkgs.stdenv.mkDerivation {
-  name = "zsign";
+mkWawonaPackage rec {
   pname = "zsign";
-  version = "0~20220120.27016df";
+  version = "0.20220120.27016df";
 
-  src = mainPkgs.fetchFromGitHub {
+  src = pkgs.fetchFromGitHub {
     owner = "zhlynn";
     repo = "zsign";
-    rev = "27016df";
+    rev = "27016df3328ce784407817926868af2d96929a00";
     sha256 = "sha256-DXUJ9WfRK/n+iSXOz6sly6bdZOXGzlyPj0B3pfrlX+8=";
   };
 
-  buildInputs = [ buildPackages.clang mainPkgs.openssl ];
+  buildInputs = [ pkgs.openssl ];
 
   buildPhase = ''
-    CXX="${buildPackages.clang}/bin/clang++"
-    CXXFLAGS="-O2 -I${mainPkgs.openssl.dev}/include"
-    LDFLAGS="-L${mainPkgs.openssl}/lib"
-    $CXX $CXXFLAGS \
-      *.cpp \
-      common/*.cpp \
-      $LDFLAGS \
-      -lcrypto \
-      -o zsign
+    $CXX $CXXFLAGS -O2 -I${pkgs.openssl.dev}/include *.cpp common/*.cpp -L${pkgs.openssl.out}/lib -lcrypto -lpthread -o zsign
   '';
 
   installPhase = ''
     mkdir -p $out/bin
-    cp zsign $out/bin
+    cp zsign $out/bin/
   '';
+
+  sileo = {
+    package = "io.wawona.zsign";
+    description = "A powerful tool for signing iOS apps";
+  };
 }

@@ -68,8 +68,8 @@ EOF
 }
 
 echo "Step 1: Building multi-platform aggregate..."
-nix build .#ios --out-link "$ROOT/result-ios" --no-link || echo "iOS build skipped"
-nix build .#android --out-link "$ROOT/result-android" --no-link || echo "Android build skipped"
+nix build .#ios --out-link "$ROOT/result-ios" || echo "iOS build skipped"
+nix build .#android --out-link "$ROOT/result-android" || echo "Android build skipped"
 
 echo "Step 2: Collecting binaries..."
 mkdir -p "$REPO_ROOT/debs"
@@ -100,5 +100,7 @@ echo "Wawona Repository Unified Successfully."
 if [ -d "$ROOT/repo" ]; then rm -rf "$ROOT/repo" ; fi
 
 cd "$ROOT"
-if [ -d ".git" ]; then git add repo/ ; fi
+if [ -d ".git" ]; then
+    git add Packages Packages.gz Release debs/
+fi
 echo "Wawona Repository Updated Successfully."

@@ -2,29 +2,27 @@ Package: com.aspauldingcode.hello
 Version: 0.1.0
 Architecture: iphoneos-arm64
 Maintainer: aspauldingcode
-Filename: ./debs/hello_0.1.0_iphoneos-arm64.deb
-Size: 808
-MD5sum: 14d300de64784178d663182087a5e547
-SHA1: 8ad78592416a90ba7b82d565abcf8798b705493b
-SHA256: 6ae931856f293b776999306f74ee85ef7d6e6ec54e207dfd91c7ca1b40619b73
+Filename: debs/hello_0.1.0_iphoneos-arm64.deb
+Size: 1380
+MD5sum: 1b10d7913e5c3d6d1c734c788ee39fb6
+SHA1: 14fde887ed1886c2d5bc2bb8a9a01863f93e42fc
+SHA256: 227b3014c6c23200af191074d87fb07967655a9ba6331ecea854d92dc3179836
 Section: Utilities
+Priority: optional
 Description: Rootless Hello
 Author: aspauldingcode
-Name: Hello
 
 Package: com.aspauldingcode.hello
-Version: 0.1.0~roothide
-Architecture: iphoneos-arm64e
+Version: 0.1.0
+Architecture: aarch64
 Maintainer: aspauldingcode
-Filename: ./debs/hello_0.1.0~roothide_iphoneos-arm64e.deb
-Size: 856
-MD5sum: c38e3761934eaa00f453ba64b8eccde6
-SHA1: 874c2946f27ba4b00c8c86f923c09006ce517353
-SHA256: dfe0eceeba36ffdd96e7752932bf9c6ed8acdabdc342a95accc7ac6b3f17522a
+Filename: debs/hello_0.1.0_aarch64.deb
+Size: 840
+MD5sum: 6686afe3772290d2a248c5bbba54d1eb
+SHA1: 4cc4deaffe4779371e5c990917cd78c3b3fa2cfc
+SHA256: b43e9b4ec12144b5240b86396b7cbfba3fe8ea2247cba0a3cf7618a605160e90
 Section: Utilities
+Priority: optional
 Description: Rootless Hello
-Tag: role::tweak, roothide::compatible
 Author: aspauldingcode
-Name: Hello
-RootHide: true
 

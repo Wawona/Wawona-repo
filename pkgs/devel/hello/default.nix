@@ -10,9 +10,9 @@ mkWawonaPackage rec {
   };
 
   sileo = {
-    package = "io.wawona.hello";
+    package = "com.aspauldingcode.hello";
     architecture = "iphoneos-arm64";
-    description = "Wawona port of GNU Hello for iOS jailbreaks";
+    description = "Rootless Hello";
   };
 
   meta = {
